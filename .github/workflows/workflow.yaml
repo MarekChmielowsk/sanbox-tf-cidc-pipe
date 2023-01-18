@@ -1,6 +1,6 @@
 # this workflow job is used to automate provision resources 
 # on Google Cloud with terraform
-# author: Marek Chmielowski (based on example by Yann Mulonda)
+# author: Marek Chmielowski (based on example by Yann Mulonda) https://gist.github.com/YannMjl
 # follows: https://medium.com/interleap/automating-terraform-deployment-to-google-cloud-with-github-actions-17516c4fb2e5
 # https://towardsdatascience.com/rapid-prototyping-using-terraform-github-action-docker-and-streamlit-in-gcp-e623ae3fdd54
 
@@ -25,8 +25,11 @@ jobs:
     defaults:
       run:
         shell: bash
+        
+    # On push to terraform branch, build or change infrastructure according to Terraform configuration files
+    if: github.ref == 'refs/heads/terraform' && github.event_name == 'push'
     
-    steps:
+    steps:      
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
@@ -54,10 +57,7 @@ jobs:
       run: terraform plan
       # this is the json key of the service account created on the project
       env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-        
-      # On push to terraform branch, build or change infrastructure according to Terraform configuration files
-      if: github.ref == 'refs/heads/terraform' && github.event_name == 'push'
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}    
 
     # Apply infrastructure changes
     - name: Terraform Apply
