@@ -85,7 +85,7 @@ jobs:
     - name: Terraform Destroy
       # If any commit message in your push or the HEAD commit of your PR 
       # contains the strings [DestroyAll] -- then terraform Destroy step will run
-      if: "contains(github.event.commits[0].message, '[DestroyAll]')"
+      #if: "contains(github.event.commits[0].message, '[DestroyAll]')"
            # terraform plan -destroy
       run: |
         terraform apply -destroy -auto-approve
