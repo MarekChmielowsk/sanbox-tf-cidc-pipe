@@ -5,6 +5,8 @@ provider "google" {
   zone    = "us-central1-c"
 }
 
+# To destroy - remove/comment out resource and in commit message add DestroyAll
+
 #resource "google_compute_network" "vpc_network" {
 #  name                    = "my-custom-mode-network"
 #  auto_create_subnetworks = false
