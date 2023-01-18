@@ -67,8 +67,8 @@ jobs:
 
     # Apply infrastructure changes
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve
+      #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #run: terraform apply -auto-approve
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
