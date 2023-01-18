@@ -29,7 +29,7 @@ resource "google_compute_instance" "default" {
   zone         = "us-central1-a"
   tags         = ["ssh"]
 
-#  boot_disk {
+  boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
     }
