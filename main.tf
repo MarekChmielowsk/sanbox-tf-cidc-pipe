@@ -5,7 +5,7 @@ provider "google" {
   zone    = "us-central1-c"
 }
 
-# Create a single Compute Engine instance
+# Create a single Compute Engine instance for pipeline test
 resource "google_compute_instance" "default" {
   name         = "test-vm"
   machine_type = "f1-micro"
