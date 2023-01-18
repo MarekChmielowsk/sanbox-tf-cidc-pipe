@@ -5,6 +5,15 @@ provider "google" {
   zone    = "us-central1-c"
 }
 
-resource "google_storage_bucket" "gcs_bucket" {
-  name = "test-bucket-random-001123"
-}
+# Create a single Compute Engine instance
+resource "google_compute_instance" "default" {
+  name         = "flask-vm"
+  machine_type = "f1-micro"
+  zone         = "us-central1-a"
+  tags         = ["ssh"]
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+    }
+  }
