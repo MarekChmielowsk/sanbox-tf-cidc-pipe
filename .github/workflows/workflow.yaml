@@ -24,9 +24,6 @@ jobs:
       run:
         shell: bash
     
-    # On push to terraform branch, build or change infrastructure according to Terraform configuration files
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -56,6 +53,9 @@ jobs:
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        
+      # On push to terraform branch, build or change infrastructure according to Terraform configuration files
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     # Apply infrastructure changes
     - name: Terraform Apply
