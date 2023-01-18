@@ -5,7 +5,7 @@ provider "google" {
   zone    = "us-central1-c"
 }
 
-# To apply   - to commit message add => [Apply_Changes] 
+# To apply   - to commit message add => [Apply_Changes]  
 # To destroy - to commit message add => [Destroy_All] 
 
 resource "google_compute_network" "vpc_network" {
