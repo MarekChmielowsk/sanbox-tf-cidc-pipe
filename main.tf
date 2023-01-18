@@ -6,7 +6,7 @@ provider "google" {
 }
 
 # To apply   - to commit message add => [Apply_Changes]  
-# To destroy - to commit message add => [Destroy_All]  
+# To destroy - to commit message add => [Destroy_All] 
 
 resource "google_compute_network" "vpc_network" {
   name                    = "terraform-test-network"
