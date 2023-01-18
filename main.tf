@@ -9,26 +9,13 @@ provider "google" {
 # To destroy - to commit message add => [Destroy_All] 
 
 resource "google_compute_network" "vpc_network" {
-  name                    = "my-custom-mode-network"
-  auto_create_subnetworks = false
-  mtu                     = 1460
+  name                    = "terraform-test-network"
+  auto_create_subnetworks = "true"
 }
 
-
-resource "google_compute_subnetwork" "default" {
-  name          = "my-custom-subnet"
-  ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1"
-  network       = google_compute_network.vpc_network.id
-}
-
-
-# Create a single Compute Engine instance
-resource "google_compute_instance" "default" {
-  name         = "test-vm"
-  machine_type = "f1-micro"
-  zone         = "us-central1-a"
-  tags         = ["ssh"]
+resource "google_compute_instance" "vm_instance" {
+  name         = "terraform-instance"
+  machine_type = "e2-micro"
 
   boot_disk {
     initialize_params {
@@ -36,14 +23,10 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  # Install Flask
-  # metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python3-pip rsync; pip install flask"
-
   network_interface {
-    subnetwork = google_compute_subnetwork.default.id
-
+    # A default network is created for all GCP projects
+    network = "default"
     access_config {
-      # Include this section to give the VM an external IP address
     }
   }
 }
