@@ -9,13 +9,22 @@ provider "google" {
 # To destroy - to commit message add => [Destroy_All] 
 
 resource "google_compute_network" "vpc_network" {
-  name                    = "terraform-test-network"
-  auto_create_subnetworks = "true"
+  name                    = "my-custom-mode-network"
+  auto_create_subnetworks = false
+  mtu                     = 1460
+}
+
+resource "google_compute_subnetwork" "default" {
+  name          = "my-custom-subnet"
+  ip_cidr_range = "10.0.1.0/24"
+  region        = "us-west1"
+  network       = google_compute_network.vpc_network.id
 }
 
 resource "google_compute_instance" "vm_instance" {
   name         = "terraform-instance"
   machine_type = "e2-micro"
+  tags         = ["ssh"]
 
   boot_disk {
     initialize_params {
@@ -25,7 +34,7 @@ resource "google_compute_instance" "vm_instance" {
 
   network_interface {
     # A default network is created for all GCP projects
-    network = google_compute_network.vpc_network.self_link
+    subnetwork = google_compute_subnetwork.default.id
     access_config {
     }
   }
