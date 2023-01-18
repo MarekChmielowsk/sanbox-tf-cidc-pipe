@@ -7,7 +7,7 @@ name: 'Terraform CI'
 on:
   push:
     branches:
-    - main
+    - terraform
   pull_request:
 
   # Allows you to run this workflow manually from the Actions tab
@@ -55,7 +55,7 @@ jobs:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         
       # On push to terraform branch, build or change infrastructure according to Terraform configuration files
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/terraform' && github.event_name == 'push'
 
     # Apply infrastructure changes
     - name: Terraform Apply
