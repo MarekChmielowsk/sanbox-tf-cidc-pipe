@@ -3,11 +3,18 @@
 # author: Marek Chmielowski (based on example by Yann Mulonda)
 
 name: 'Terraform CI'
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 
 on:
   push:
     branches:
     - main
+    - terraform
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md # Should never be edited anyway
+      - .gitignore
+      - .github/**
   pull_request:
 
   # Allows you to run this workflow manually from the Actions tab
@@ -27,7 +34,7 @@ jobs:
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
