@@ -60,8 +60,10 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false
+      if: github.event_name == 'pull_request'
+      run: terraform plan -no-color
       continue-on-error: true
+
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
