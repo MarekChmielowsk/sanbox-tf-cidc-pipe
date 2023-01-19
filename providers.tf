@@ -6,7 +6,7 @@ provider "google" {
 
 terraform {
   backend "gcs" {
-    bucket = "marek-sandbox-1-pr-456108963769-tfstate"
+    bucket = "sandbox-marek-1-pr-456108963769-tfstate"
     prefix = "terraform/state"
   }
 }
