@@ -45,6 +45,9 @@ jobs:
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -59,10 +62,12 @@ jobs:
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-
+      
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan
+      if: github.event_name == 'pull_request'
+      run: terraform plan -no-color -input=false
+      continue-on-error: true
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
