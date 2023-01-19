@@ -60,7 +60,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -no-color
+      run: terraform plan -no-color -input=false
       continue-on-error: true
 
       # this is the json key of the service account created on the project
