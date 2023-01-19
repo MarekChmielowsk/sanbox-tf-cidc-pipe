@@ -3,7 +3,7 @@
 # author: Marek Chmielowski (based on simple example by Yann Mulonda)
 
 name: 'Terraform CI'
-run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+run-name: Deploy by @${{ github.actor }}
 
 on:
   push:
@@ -20,6 +20,8 @@ on:
       - master
       - terraform
       - develop
+    types:
+      - opened  
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -43,24 +45,29 @@ jobs:
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: echo "Terraform init"; terraform init
+      run: terraform init
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
     # # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
-      run: echo "Checking terraform format"; terraform fmt -check
+      run: terraform fmt -check
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-
+      
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: echo "Only terraform plan"; terraform plan
+      if: github.event_name == 'pull_request'
+      run: terraform plan -no-color -input=false
+      continue-on-error: true
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
@@ -73,7 +80,7 @@ jobs:
       # If any commit message in your push or the HEAD commit of your PR 
       # contains the strings [Apply_Changes] -- then terraform Apply step will run
       if: "contains(github.event.commits[0].message, '[Apply_Changes]')"
-      run: echo "Deploying to GCP"; terraform apply -auto-approve
+      run: echo "Pushed to main with message [Apply_Changes] => Deploying to GCP"; terraform apply -auto-approve
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
@@ -82,8 +89,7 @@ jobs:
       # If any commit message in your push or the HEAD commit of your PR 
       # contains the strings [Destroy_All] -- then terraform Destroy step will run
       if: "contains(github.event.commits[0].message, '[Destroy_All]')"
-      run: |
-        terraform apply -destroy -auto-approve
+      run: echo "Pushed to main with message [Destroy_All] => Destroing in GCP"; terraform apply -destroy -auto-approve
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
