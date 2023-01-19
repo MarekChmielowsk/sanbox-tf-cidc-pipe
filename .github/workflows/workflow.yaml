@@ -1,9 +1,9 @@
 # this workflow job is used to automate provision resources 
 # on Google Cloud with terraform
-# author: Marek Chmielowski (based on example by Yann Mulonda)
+# author: Marek Chmielowski (based on simple example by Yann Mulonda)
 
 name: 'Terraform CI'
-#run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 
 on:
   push:
@@ -47,21 +47,21 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init
+      run: echo "Terraform init"; terraform init
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
     # # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
-      run: terraform fmt -check
+      run: echo "Checking terraform format"; terraform fmt -check
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan
+      run: echo "Only terraform plan"; terraform plan
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
@@ -74,7 +74,7 @@ jobs:
       # If any commit message in your push or the HEAD commit of your PR 
       # contains the strings [Apply_Changes] -- then terraform Apply step will run
       if: "contains(github.event.commits[0].message, '[Apply_Changes]')"
-      run: terraform apply -auto-approve
+      run: echo "Deploying to GCP"; terraform apply -auto-approve
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
