@@ -3,7 +3,7 @@
 # author: Marek Chmielowski (based on simple example by Yann Mulonda)
 
 name: 'Terraform CI'
-run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+run-name: Deploy by @${{ github.actor }}
 
 on:
   push:
@@ -20,7 +20,7 @@ on:
       - master
       - terraform
     types:
-      - open
+      - opened
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
