@@ -62,7 +62,6 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -no-color -input=false
       continue-on-error: true
-
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
