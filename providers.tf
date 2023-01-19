@@ -4,9 +4,9 @@ provider "google" {
   zone    = var.zone
 }
 
-#terraform {
-#  backend "gcs" {
-#    bucket = "sandbox-marek-260185-tfstate"
-#    prefix = "terraform/state"
-#  }
-#}
+terraform {
+  backend "gcs" {
+    bucket = "sandbox-marek-1-pr-456108963769-tfstate"
+    prefix = "terraform/state"
+  }
+}
