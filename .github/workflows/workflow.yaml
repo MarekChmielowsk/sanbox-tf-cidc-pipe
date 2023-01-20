@@ -73,6 +73,14 @@ jobs:
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+              
+      # Shows 
+    - name: Terraform Show
+      id: show_plan
+      run: terraform show
+      # this is the json key of the service account created on the project
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  
         
       # On push to terraform branch, build or change infrastructure according to Terraform configuration files
       
@@ -101,4 +109,11 @@ jobs:
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-
+        
+      # Shows 
+    - name: Terraform Show
+      id: show_final
+      run: terraform show
+      # this is the json key of the service account created on the project
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
