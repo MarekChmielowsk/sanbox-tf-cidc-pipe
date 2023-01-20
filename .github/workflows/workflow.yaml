@@ -75,8 +75,13 @@ jobs:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         
       # On push to terraform branch, build or change infrastructure according to Terraform configuration files
+          
+    - name: Terraform Show
+      id: show
+      run: terraform show
       
     - name: Terraform Plan Failed
+      id: fail_exit
       if: steps.plan.outcome == 'failure'
       run: exit 1
         
