@@ -76,8 +76,7 @@ jobs:
               
       # Shows 
     - name: Terraform Show
-      id: show1
-      if: github.event_name == 'pull_request'
+      id: show_plan
       run: terraform show
       # this is the json key of the service account created on the project
       env:
@@ -113,8 +112,7 @@ jobs:
         
       # Shows 
     - name: Terraform Show
-      id: show
-      if: github.event_name == 'pull_request'
+      id: show_final
       run: terraform show
       # this is the json key of the service account created on the project
       env:
