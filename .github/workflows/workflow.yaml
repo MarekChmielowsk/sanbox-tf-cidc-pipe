@@ -73,10 +73,20 @@ jobs:
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+              
+      # Shows 
+    - name: Terraform Show
+      id: show1
+      if: github.event_name == 'pull_request'
+      run: terraform show
+      # this is the json key of the service account created on the project
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  
         
       # On push to terraform branch, build or change infrastructure according to Terraform configuration files
       
     - name: Terraform Plan Failed
+      id: fail_exit
       if: steps.plan.outcome == 'failure'
       run: exit 1
         
@@ -97,6 +107,15 @@ jobs:
       #if: github.ref == 'refs/heads/main' && github.event_name == 'push' && "contains(github.event.commits[0].message, '[Destroy_All]')"
       if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.commits[0].message, '[Destroy_All]')"
       run: terraform apply -destroy -auto-approve
+      # this is the json key of the service account created on the project
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        
+      # Shows 
+    - name: Terraform Show
+      id: show
+      if: github.event_name == 'pull_request'
+      run: terraform show
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
