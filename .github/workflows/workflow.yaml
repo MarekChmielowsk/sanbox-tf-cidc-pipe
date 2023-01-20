@@ -76,10 +76,6 @@ jobs:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         
       # On push to terraform branch, build or change infrastructure according to Terraform configuration files
-      #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    - name: Apply only on push to main
-      if: github.ref != 'refs/heads/main' || github.event_name != 'push'
-      run: exit 1
       
     - name: Terraform Plan Failed
       if: steps.plan.outcome == 'failure'
@@ -90,7 +86,7 @@ jobs:
       # If any commit message in your push or the HEAD commit of your PR 
       # contains the strings [Apply_Changes] -- then terraform Apply step will run
       # if: github.ref == 'refs/heads/main' && github.event_name == 'push' && "contains(github.event.commits[0].message, '[Apply_Changes]')"
-      if: "github.event_name == 'push' && contains(github.event.commits[0].message, '[Apply_Changes]')"
+      if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.commits[0].message, '[Apply_Changes]')"
       run: echo "Deploying to GCP"; terraform apply -auto-approve
       # this is the json key of the service account created on the project
       env:
@@ -100,7 +96,7 @@ jobs:
       # If any commit message in your push or the HEAD commit of your PR 
       # contains the strings [Destroy_All] -- then terraform Destroy step will run
       #if: github.ref == 'refs/heads/main' && github.event_name == 'push' && "contains(github.event.commits[0].message, '[Destroy_All]')"
-      if: "github.event_name == 'push' && contains(github.event.commits[0].message, '[Destroy_All]')"
+      if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.commits[0].message, '[Destroy_All]')"
       run: terraform apply -destroy -auto-approve
       # this is the json key of the service account created on the project
       env:
