@@ -113,6 +113,7 @@ jobs:
       # Shows 
     - name: Terraform Show
       id: show_final
+      if: "github.ref == 'refs/heads/main' && github.event_name == 'push'"
       run: terraform show
       # this is the json key of the service account created on the project
       env:
