@@ -63,6 +63,10 @@ jobs:
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
+      
+    - name: Terraform List State
+      id: list
+      run: terraform state list
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
