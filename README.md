@@ -1,7 +1,9 @@
 # sanbox-tf-cidc-pipe
 Sandbox CD/CI Terraform pipeline
 
-In Google Sandbox project
+For Sandbox project
+
+Setup
 
 1) Create Service Account.
 2) Assign the roles: Editor (and required permission based on TF config)
