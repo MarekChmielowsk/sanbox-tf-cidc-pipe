@@ -4,5 +4,5 @@
 
 resource "google_storage_bucket" "bucket_internal" {
   name     = var.bucket_name  # "test-bucket-random-260185-23"
-  location = var.region
+  location = var.bucket_location
 }
