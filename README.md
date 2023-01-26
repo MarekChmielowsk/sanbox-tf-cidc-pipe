@@ -13,5 +13,5 @@ In Google Sandbox project
 Operation
 
 1) Opening pull request triggers terraform plan
-2) To apply -> commit/ merge to main with "[ApplyALL]" message
-3) To clear all except terraform stora bucket ->  -> commit/ merge to main with "[DestroyALL]" message
+2) To apply -> commit/ merge to main with "[Apply_Changes]" message
+3) To clear all except terraform stora bucket ->  -> commit/ merge to main with "[Destroy_ALL]" message
