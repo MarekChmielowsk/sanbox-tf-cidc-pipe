@@ -5,7 +5,7 @@ In Google Sandbox project
 
 1) Create Service Account.
 2) Assign the roles: Editor (and required permission based on TF config)
-3) Download the service account key to GitHub secrets as GCP_CREDENTIALS
+3) Download the service account key to GitHub secrets as GCP_CREDENTIALS. ( top menu Settings / Secrets and Variables / Actions -> New repository secret
 4) Use in workflow *.yaml in the following way: env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 5) Check if Cloud Resource Manager API is enabled
