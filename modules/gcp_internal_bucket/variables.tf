@@ -3,3 +3,8 @@ variable "bucket_name" {
   type        = string
   default     = "test-bucket-random-260185-23"
 }
+
+variable "bucket_location" {
+  description = "Region for the bucket"
+  type        = string
+}
