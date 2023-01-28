@@ -90,7 +90,11 @@ jobs:
     - name: Terraform Plan Failed
       id: fail_exit
       if: steps.plan.outcome == 'failure'
-      run: exit 1
+      run: echo "terraform plan FAILED -> will EXIT"; exit 1
+      
+    # Check if marked [Apply_Changes]
+    - name: Check [Apply_Changes]
+      run: echo "github.event.commits[0].message: {{github.event.commits[0].message}} "
         
     # Apply infrastructure changes
     - name: Terraform Apply
