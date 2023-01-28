@@ -1,5 +1,5 @@
 
-# To apply   - to commit message add => just merge to main from pull request -> checks  ?
+# To apply   - to commit message add => just merge to main from pull request -> checks  ? 
 # To destroy - to commit message add => [Destroy_All] 
 
 # resource "google_storage_bucket" "bucket_test" {
