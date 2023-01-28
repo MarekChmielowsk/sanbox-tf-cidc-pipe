@@ -97,7 +97,7 @@ jobs:
       # If any commit message in your push or the HEAD commit of your PR 
       # contains the strings [Apply_Changes] -- then terraform Apply step will run
       # if: github.ref == 'refs/heads/main' && github.event_name == 'push' && "contains(github.event.commits[0].message, '[Apply_Changes]')"
-      if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.commits[0].message, '[Apply_Changes]')"
+      if: "github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'pull_request' ) && contains(github.event.commits[0].message, '[Apply_Changes]')"
       run: echo "Deploying to GCP"; terraform apply -auto-approve
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
