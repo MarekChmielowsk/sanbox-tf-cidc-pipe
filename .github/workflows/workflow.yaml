@@ -97,10 +97,9 @@ jobs:
       id: fail_exit
       if: steps.plan.outcome == 'failure'
       run: echo "terraform plan FAILED -> will EXIT"; exit 1
-      
-    # Check if marked [Destroy_All]
-    - name: Check [Destroy_All]
-      run: echo "HitHub message ${{github.event.commits[0].message}} " 
+    # Check if merged
+    - name: Check if merged
+      run: echo "HitHub message ${{github.event.pull_request.merged}} " 
         
     # Apply infrastructure changes
     - name: Terraform Apply
@@ -108,10 +107,14 @@ jobs:
       # contains the strings [Apply_Changes] -- then terraform Apply step will run
       # if: github.ref == 'refs/heads/main' && github.event_name == 'push' && "contains(github.event.commits[0].message, '[Apply_Changes]')"
       # if: "github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'pull_request' ) && contains(github.event.commits[0].message, '[Apply_Changes]')"
-      if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.commits[0].message, 'Merge pull request')"
+      if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && github.event.pull_request.merged == true"
       run: echo "Deploying to GCP"; terraform apply -auto-approve
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        
+    # Check if marked [Destroy_All]
+    - name: Check [Destroy_All]
+      run: echo "HitHub message ${{github.event.commits[0].message}} " 
      
     - name: Terraform Destroy
       # If any commit message in your push or the HEAD commit of your PR 
