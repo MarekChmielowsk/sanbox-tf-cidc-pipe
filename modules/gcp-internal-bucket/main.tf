@@ -3,6 +3,7 @@
 # To destroy - to commit message add => [Destroy_All]
 
 resource "google_storage_bucket" "bucket_internal" {
-  name     = var.bucket_name  # "test-bucket-random-260185-23"
+  count    = var.bucket_counts
+  name     = "internal-${var.bucket_name}-${count.index}"
   location = var.bucket_location
 }
