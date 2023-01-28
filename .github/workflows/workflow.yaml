@@ -99,8 +99,8 @@ jobs:
       run: echo "terraform plan FAILED -> will EXIT"; exit 1
       
     # Check if apply
-    - name: Check if merged
-      run: echo "HitHub merged ${{github.event.pull_request.merged}} " 
+    - name: Check if review
+      run: echo "HitHub review ${{github.event.review.state}} " 
         
     # Apply infrastructure changes
     - name: Terraform Apply
