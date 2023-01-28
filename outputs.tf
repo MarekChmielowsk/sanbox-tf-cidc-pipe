@@ -5,7 +5,7 @@ output "rnd_str_6_result" {
 
 output "test_buckets_names" {
   description = "Test bucket names"
-  value       = "Buckets: ${module.internal_bucket.internal_bucket_names}"
+  value       = module.internal_bucket.internal_bucket_names
 }
 
 
