@@ -93,8 +93,8 @@ jobs:
       run: echo "terraform plan FAILED -> will EXIT"; exit 1
       
     # Check if marked [Apply_Changes]
-    - name: Check [Apply_Changes]
-      run: echo 'github.event.commits[0].message: ${{github.event.commits[0].message}}' 
+    #- name: Check [Apply_Changes]
+    #  run: echo 'github.event.commits[0].message: ${{github.event.commits[0].message}}' 
         
     # Apply infrastructure changes
     - name: Terraform Apply
