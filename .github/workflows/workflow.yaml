@@ -97,9 +97,10 @@ jobs:
       id: fail_exit
       if: steps.plan.outcome == 'failure'
       run: echo "terraform plan FAILED -> will EXIT"; exit 1
-    # Check if merged
+      
+    # Check if apply
     - name: Check if merged
-      run: echo "HitHub message ${{github.event.pull_request.merged}} " 
+      run: echo "HitHub merged ${{github.event.pull_request.merged}} " 
         
     # Apply infrastructure changes
     - name: Terraform Apply
