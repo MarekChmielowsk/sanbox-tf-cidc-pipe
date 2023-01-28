@@ -5,7 +5,7 @@ output "rnd_str_6_result" {
 
 output "test_bucket_name" {
   description = "Test bucket namer"
-  value       = "Bucket: ${module.internal_bucket.name} created at ${module.internal_bucket.location}"
+  value       = "Bucket: ${module.internal_bucket.internal_bucket_name_location}"
 }
 
 
