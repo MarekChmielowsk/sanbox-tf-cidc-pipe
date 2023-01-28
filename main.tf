@@ -10,7 +10,8 @@
 module "internal_bucket" {
   source = "./modules/gcp-internal-bucket"
   # required input param
-  bucket_name = "test-bucket-random-260185-23"
+  # bucket_name = "test-bucket-random-260185-23"
+  bucket_name = "test-${var.project_nr}-260185-23"
   bucket_location = var.region
 }
 
