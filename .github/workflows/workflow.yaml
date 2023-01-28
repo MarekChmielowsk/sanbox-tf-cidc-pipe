@@ -44,7 +44,7 @@ jobs:
     - name: GitHun Info
       run: |
         echo "HitHub github.ref ${{github.ref}} github.event_name ${{github.event_name}} message ${{github.event.commits[0].message}} "
-        echo "issue_comment ${{github.event.issue_comment[0].message}} "
+        echo "event ${{github.event.commits[0].sha}} "
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -96,11 +96,7 @@ jobs:
     - name: Terraform Plan Failed
       id: fail_exit
       if: steps.plan.outcome == 'failure'
-      run: echo "terraform plan FAILED -> will EXIT"; exit 1
-      
-    # Check if apply
-    - name: Check if review
-      run: echo "HitHub review ${{github.event.review.state}} " 
+      run: echo "terraform plan FAILED -> will EXIT"; exit 1 
         
     # Apply infrastructure changes
     - name: Terraform Apply
@@ -108,7 +104,7 @@ jobs:
       # contains the strings [Apply_Changes] -- then terraform Apply step will run
       # if: github.ref == 'refs/heads/main' && github.event_name == 'push' && "contains(github.event.commits[0].message, '[Apply_Changes]')"
       # if: "github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'pull_request' ) && contains(github.event.commits[0].message, '[Apply_Changes]')"
-      if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && github.event.pull_request.merged == true"
+      if: "github.ref == 'refs/heads/main' && github.event_name == 'push'"
       run: echo "Deploying to GCP"; terraform apply -auto-approve
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
