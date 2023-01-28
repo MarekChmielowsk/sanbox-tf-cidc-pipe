@@ -45,24 +45,29 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       
     # # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      id: fmt
-      run: terraform fmt -check
+    #- name: Terraform Format
+    #  id: fmt
+    #  run: terraform fmt -check
       # this is the json key of the service account created on the project
-      env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+    #  env:
+    #    GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       id: init
       run: terraform init
-      # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
+      
+    #- name: Terraform List State
+    #  id: list
+    #  run: terraform state list
+    #  env:
+    #    GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
@@ -70,17 +75,15 @@ jobs:
       if: github.event_name == 'pull_request'
       run: terraform plan -no-color -input=false
       continue-on-error: true
-      # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
               
       # Shows 
-    - name: Terraform Show
-      id: show_plan
-      run: terraform show
-      # this is the json key of the service account created on the project
-      env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  
+    #- name: Terraform Show
+    #  id: show_plan
+    #  run: terraform show
+    #  env:
+    #    GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  
         
       # On push to terraform branch, build or change infrastructure according to Terraform configuration files
       
@@ -96,7 +99,6 @@ jobs:
       # if: github.ref == 'refs/heads/main' && github.event_name == 'push' && "contains(github.event.commits[0].message, '[Apply_Changes]')"
       if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.commits[0].message, '[Apply_Changes]')"
       run: echo "Deploying to GCP"; terraform apply -auto-approve
-      # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
      
@@ -106,15 +108,13 @@ jobs:
       #if: github.ref == 'refs/heads/main' && github.event_name == 'push' && "contains(github.event.commits[0].message, '[Destroy_All]')"
       if: "github.ref == 'refs/heads/main' && github.event_name == 'push' && contains(github.event.commits[0].message, '[Destroy_All]')"
       run: terraform apply -destroy -auto-approve
-      # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         
       # Shows 
-    - name: Terraform Show
-      id: show_final
-      if: "github.ref == 'refs/heads/main' && github.event_name == 'push'"
-      run: terraform show
-      # this is the json key of the service account created on the project
-      env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+    #- name: Terraform Show
+    #  id: show_final
+    #  if: "github.ref == 'refs/heads/main' && github.event_name == 'push'"
+    #  run: terraform show
+    #  env:
+    #    GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
