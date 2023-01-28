@@ -94,7 +94,7 @@ jobs:
       
     # Check if marked [Apply_Changes]
     - name: Check [Apply_Changes]
-      run: echo "github.event.commits[0].message: {{github.event.commits[0].message}} "
+      run: echo 'github.event.commits[0].message: ${{github.event.commits[0].message}}' 
         
     # Apply infrastructure changes
     - name: Terraform Apply
