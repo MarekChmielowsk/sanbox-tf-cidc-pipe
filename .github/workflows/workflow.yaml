@@ -96,8 +96,8 @@ jobs:
       if: steps.plan.outcome == 'failure'
       run: echo "terraform plan FAILED -> will EXIT"; exit 1
       
-    # Check if marked [Apply_Changes]
-    - name: Check [Apply_Changes]
+    # Check if marked [[Destroy_All]]
+    - name: Check [[Destroy_All]]
       run: echo "HitHub message ${{github.event.commits[0].message}} " 
         
     # Apply infrastructure changes
