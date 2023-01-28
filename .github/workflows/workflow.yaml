@@ -38,7 +38,11 @@ jobs:
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3 
+          
+    # GitHub info
+    - name: GitHun Info
+      run: echo "HitHub github.ref ${{github.ref}} github.event_name ${{github.event_name}} message ${{github.event.commits[0].message}} "
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -94,7 +98,7 @@ jobs:
       
     # Check if marked [Apply_Changes]
     - name: Check [Apply_Changes]
-      run: echo 'HitHub github.event_name ${{github.event_name}} message ${{github.event.commits[0].message}} ' 
+      run: echo "HitHub message ${{github.event.commits[0].message}} " 
         
     # Apply infrastructure changes
     - name: Terraform Apply
