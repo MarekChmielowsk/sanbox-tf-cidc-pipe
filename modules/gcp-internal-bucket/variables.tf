@@ -9,7 +9,7 @@ variable "bucket_location" {
   type        = string
 }
 
-variable "bucket_counts" {
+variable "bucket_count" {
   description = "Number of buckets to create"
   type        = number
   default     = 1
