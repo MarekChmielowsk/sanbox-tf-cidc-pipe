@@ -3,7 +3,7 @@ output "internal_bucket_names" {
   value = google_storage_bucket.bucket_internal[*].name
 }
 
-output "internal_bucket_locations" {
-  description = "internal buckets locations"
-  value = google_storage_bucket.bucket_internal[*].location
+output "internal_bucket_0_location" {
+  description = "internal bucket[0] location"
+  value = google_storage_bucket.bucket_internal[0].location
 }
