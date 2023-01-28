@@ -68,6 +68,10 @@ jobs:
     #  run: terraform state list
     #  env:
     #    GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+    
+    # GitHub info
+    - name: GitHun Info
+      run: echo "HitHub github.ref ${{github.ref}} github.event_name ${{github.event_name}} message ${{github.event.commits[0].message}} "
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
