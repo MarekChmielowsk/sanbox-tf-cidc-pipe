@@ -44,7 +44,7 @@ jobs:
     - name: GitHun Info
       run: |
         echo "HitHub github.ref ${{github.ref}} github.event_name ${{github.event_name}} message ${{github.event.commits[0].message}} "
-        echo "event ${{github.event.commits[0].sha}} "
+        echo "event commits[0] sha #${{github.event.commits[0].sha}} "
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -110,8 +110,8 @@ jobs:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         
     # Check if marked [Destroy_All]
-    - name: Check [Destroy_All]
-      run: echo "HitHub message ${{github.event.commits[0].message}} " 
+    #- name: Check [Destroy_All]
+    #  run: echo "HitHub message ${{github.event.commits[0].message}} " 
      
     - name: Terraform Destroy
       # If any commit message in your push or the HEAD commit of your PR 
