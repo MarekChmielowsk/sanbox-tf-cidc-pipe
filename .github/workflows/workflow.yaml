@@ -42,7 +42,9 @@ jobs:
           
     # GitHub info
     - name: GitHun Info
-      run: echo "HitHub github.ref ${{github.ref}} github.event_name ${{github.event_name}} message ${{github.event.commits[0].message}} "
+      run: |
+        echo "HitHub github.ref ${{github.ref}} github.event_name ${{github.event_name}} message ${{github.event.commits[0].message}} "
+        echo "issue_comment ${{github.event.issue_comment[0].message}} "
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
