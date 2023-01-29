@@ -1,20 +1,5 @@
-
-# To apply   - just merge/push to main 
-# To destroy - to merge/push to main with commit message contains => [Destroy_All]  
-
-# resource "google_storage_bucket" "bucket_test" {
-#   name     = "test-bucket-random-260185-23"
-#   location = var.region
-# }
-
-data "google_compute_zones" "available_zones" {
-}
-
-resource "random_string" "rnd_str_6" {
-  length  = 6
-  special = false
-}
-
+Example module for creating buckets
+Usage example:
 module "internal_bucket" {
   source = "./modules/gcp-internal-bucket"
   # required input param
@@ -26,4 +11,4 @@ module "internal_bucket" {
   # optional
   bucket_count = 3
 }
-
+If bucket_count is not defined only single bucket willl be created
