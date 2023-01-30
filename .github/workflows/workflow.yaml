@@ -51,9 +51,11 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       
     # # Checks that all Terraform configuration files adhere to a canonical format
+    # To fix formats run in local console: terrafom fmt -diff -recursive
+    # after review run in console (or if you brave in workflow): terrafom fmt -diff -recursive -write=true
     - name: Terraform Format
       id: fmt
-      run: terraform fmt -diff -recursive
+      run: terraform fmt -check -recursive
       # this is the json key of the service account created on the project
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
