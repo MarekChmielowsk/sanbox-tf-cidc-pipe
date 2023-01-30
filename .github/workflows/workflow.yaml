@@ -51,12 +51,12 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       
     # # Checks that all Terraform configuration files adhere to a canonical format
-    #- name: Terraform Format
-    #  id: fmt
-    #  run: terraform fmt -check
+    - name: Terraform Format
+      id: fmt
+      run: terraform fmt -check
       # this is the json key of the service account created on the project
-    #  env:
-    #    GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
