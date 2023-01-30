@@ -16,7 +16,7 @@ module "internal_bucket" {
   
   bucket_location = var.region  # Or hardcode region
   
-  ## optional
+  % optional
   
   bucket_count = 
   
