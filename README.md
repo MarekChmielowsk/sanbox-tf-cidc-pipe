@@ -24,3 +24,7 @@ Operation in GitHub
 5) Several pull requests can be merge to terraform branch without triggering terraform apply (but there are several plans for review)
 6) To apply to GCP -> create pull request on terraform baranch -> to main branch => commit/or merge to main branch triggers terraform apply 
 7) To clear all resources except terraform storage bucket ->  commit/ merge to main branch with "[Destroy_ALL]" in commit message
+
+Example:
+1) This example creates several buckets using local module
+2) Please remember to destory test buckets by commit to main with commit message [Destroy_ALL]
