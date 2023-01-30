@@ -16,11 +16,12 @@ module "internal_bucket" {
   
   bucket_location = var.region  # Or hardcode region
   
-  # optional
+  ## optional
   
   bucket_count = 
   
 }
+Replace % with hash (hash is change fonts to bold in README.md
 
 If bucket_count is not defined only single bucket willl be created
 
