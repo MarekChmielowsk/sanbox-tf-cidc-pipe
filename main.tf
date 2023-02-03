@@ -1,5 +1,5 @@
 
-# To apply   - just merge/push to main 
+# To apply   - just merge/push to main  
 # To destroy - to merge/push to main with commit message contains => [Destroy_All]   
 
 # Configuration destroy [Destroy_ALL] on 30th Jan 2023 at 11;48 CET 
