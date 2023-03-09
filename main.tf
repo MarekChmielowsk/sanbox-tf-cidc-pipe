@@ -3,6 +3,7 @@
 # To destroy - to merge/push to main with commit message contains => [Destroy_All]   
 # test update 9th March 2023 14:44 CET   
 
+
 # resource "google_storage_bucket" "bucket_test" {
 #   name     = "test-bucket-random-260185-23"
 #   location = var.region
