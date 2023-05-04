@@ -13,7 +13,7 @@ data "google_compute_zones" "available_zones" {
 }
 
 resource "random_string" "rnd_str_6" {
-  length  = 6
+  length  = 7
   special = false
 }
 
