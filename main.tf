@@ -4,6 +4,7 @@
 
 # test update 19th July 2023 13:45 CET   
 
+
 # resource "google_storage_bucket" "bucket_test" {
 #   name     = "test-bucket-random-260185-23"
 #   location = var.region
