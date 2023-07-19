@@ -1,8 +1,8 @@
 
 # To apply   - just merge/push to main  
 # To destroy - to merge/push to main with commit message contains => [Destroy_All]   
-# test update 19th July 2023 14:44 CET   
 
+# test update 19th July 2023 13:44 CET   
 
 # resource "google_storage_bucket" "bucket_test" {
 #   name     = "test-bucket-random-260185-23"
@@ -13,7 +13,7 @@ data "google_compute_zones" "available_zones" {
 }
 
 resource "random_string" "rnd_str_6" {
-  length  = 6
+  length  = 7
   special = false
 }
 
