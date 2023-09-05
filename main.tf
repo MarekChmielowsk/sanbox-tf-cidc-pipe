@@ -2,7 +2,7 @@
 # To apply   - just merge/push to main  
 # To destroy - to merge/push to main with commit message contains => [Destroy_All]   
 
-# test update 19th July 2023 13:45 CET   
+# test update 5th Sep 2023 12:25 CET   
 
 
 # resource "google_storage_bucket" "bucket_test" {
