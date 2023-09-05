@@ -1,4 +1,4 @@
-# To apply   - just merge/push to main 
+# To apply   - just merge/push to main   
 # To destroy - to merge/push to main with commit message contains => [Destroy_All] 
 
 resource "google_storage_bucket" "bucket_internal" {
