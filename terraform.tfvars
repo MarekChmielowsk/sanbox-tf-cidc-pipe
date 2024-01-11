@@ -1,4 +1,4 @@
-project_id = "marek-sandbox-2"
-project_nr = "456108963769"
+project_id = "my-test-project-410810"
+project_nr = "544202318769"
 region     = "europe-central2"
 zone       = "europe-central2-c"
