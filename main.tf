@@ -2,10 +2,10 @@
 # To apply   - just merge/push to main  
 # To destroy - to merge/push to main with commit message contains => [Destroy_All]   
 
-# test update 12th Jan 2024 13:55 CET
-# test update 15th Sep 2023 12:25 CET
-# test update 30th Nov 2023 14:27 CET
-# test update 21st Dec 2023 14:27 CET
+# test update 5th Sep 2023 12:25 CET   
+# test update 30th Nov 2023 14:27 CET  
+# test update 21st Dec 2023 14:27 CET  
+
 
 # resource "google_storage_bucket" "bucket_test" {
 #   name     = "test-bucket-random-260185-23"
@@ -27,10 +27,7 @@ module "internal_bucket" {
   bucket_name = "test-bucket-fixed-260185"
   # this will create a new test bucket(s) on every terraform apply
   # bucket_name = lower("test-pr-nr-${var.project_nr}-rnd-${random_string.rnd_str_6.result}-time-${formatdate("YYYYMMDDhhmmss", timestamp())}")
-  # bucket_name = "test-pr-nr-1239-abc"
-  bucket_location = var.region 
-  # Or hardcode region
+  bucket_location = var.region # Or hardcode region
   # optional
   bucket_count = 3
 }
-
