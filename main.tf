@@ -3,7 +3,8 @@
 # To destroy - to merge/push to main with commit message contains => [Destroy_All]   
 
 # test update 5th Sep 2023 12:25 CET  
-# test update 30th Nov 2023 12:26 CET 
+# test update 30th Nov 2023 12:26 CET  
+# test update 21st Dec 2023 14:27 CET 
 # test update 16TH Dec 2024 10:50 CET 
 
 
@@ -31,4 +32,3 @@ module "internal_bucket" {
   # optional
   bucket_count = 3
 }
-
