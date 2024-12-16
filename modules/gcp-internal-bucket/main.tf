@@ -5,4 +5,14 @@ resource "google_storage_bucket" "bucket_internal" {
   count    = var.bucket_count
   name     = "internal-${var.bucket_name}-${count.index}"
   location = var.bucket_location
+
+  lifecycle_rule {
+    condition {
+      age = 3
+    }
+    action {
+      type = "Delete"
+    }
+  }
+
 }
